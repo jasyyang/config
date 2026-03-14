@@ -90,6 +90,38 @@ require('lazy').setup({
     },
   },
 
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        direction = 'float',
+        float_ops = {
+          border = 'shadow',
+          winblend = 40,
+        },
+        shade_terminals = true,
+        shading_factor = '50',
+        winbar = {
+          enabled = false,
+          name_formatter = function(term) return term.name end,
+        },
+        highlights = {
+          NormalFloat = {
+            link = 'Normal',
+          },
+          FloatBorder = {
+            link = 'FloatBorder',
+          },
+        },
+        size = 20,
+      }
+      vim.api.nvim_set_hl(0, 'NormalFloat', {})
+      vim.api.nvim_set_hl(0, 'FloatBorder', {})
+      vim.keymap.set({ 'n', 't' }, ';;', '<cmd>ToggleTerm direction=float<cr>')
+    end,
+  },
+
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     enabled = true,
@@ -272,7 +304,8 @@ require('lazy').setup({
                 loadOutDirsFromCheck = true,
                 buildScripts = { enable = true },
               },
-              checkOnSave = {
+              checkOnSave = true,
+              check = {
                 command = 'clippy',
               },
               procMacro = { enable = true },
@@ -357,6 +390,15 @@ require('lazy').setup({
   },
 
   {
+    'nvim-neo-tree/neo-tree.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+  },
+
+  {
     'goolord/alpha-nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -419,7 +461,8 @@ require('lazy').setup({
         button('r', '  Recent files', ':Telescope oldfiles<CR>'),
         button('g', '󰈬  Live grep', ':Telescope live_grep<CR>'),
         button('c', '  Config', ':cd ~/.config/nvim | Telescope find_files<CR>'),
-        button('p1', '  Project: code', ':cd ~/code | Telescope find_files<CR>'),
+        button('p1', '  Directory: code', '<cmd>Neotree dir=/home/jason/code position=current<CR>'),
+        button('p2', '  Directory: rustbook', '<cmd>Neotree dir=/home/jason/code/projects/rustbook position=current<CR>'),
         button('q', '  Quit', ':qa<CR>'),
       }
       dashboard.section.buttons.opts = {
@@ -620,7 +663,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 }, { ---@diagnostic disable-line: missing-fields
   ui = {
