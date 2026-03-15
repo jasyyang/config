@@ -157,27 +157,26 @@ require('lazy').setup({
       require('telescope').setup {
         defaults = {
           file_ignore_patterns = {
-            "node_modules/",
-            ".venv/",
-            "*.js",
-	    ".DS_Store",
-	    "*.log",
-	    "*.pid",
-	    "*.tmp",
-	    "__pycache__/",
-	    "*.pyc",
-	    "*.pyo",
-	    "*.pyd",
-	    ".pytest_cache/",
-	    ".coverage",
-	    "htmlcov/",
-	    "build/",
-	    ".pyright/",
-	    "npm-debug.log*",
-	    ".next/",
-	    ".cache/",
-	    "dist/",
-
+            'node_modules/',
+            '.venv/',
+            '*.js',
+            '.DS_Store',
+            '*.log',
+            '*.pid',
+            '*.tmp',
+            '__pycache__/',
+            '*.pyc',
+            '*.pyo',
+            '*.pyd',
+            '.pytest_cache/',
+            '.coverage',
+            'htmlcov/',
+            'build/',
+            '.pyright/',
+            'npm-debug.log*',
+            '.next/',
+            '.cache/',
+            'dist/',
           },
         },
         extensions = {
@@ -507,13 +506,13 @@ require('lazy').setup({
         },
       }
       local buttons = {
-        button('f', '󰱼  Find file', ':Telescope find_files<CR>'),
+        button('d', '󰱼  Current directory', '<cmd>Neotree dir=. position=current<CR>'),
         button('r', '  Recent files', ':Telescope oldfiles<CR>'),
         button('g', '󰈬  Live grep', ':Telescope live_grep<CR>'),
-        button('c', '  Config', ':cd ~/.config/nvim | Telescope find_files<CR>'),
+        button('c', '  Config', '<cmd>Neotree dir=~/.config position=current<CR>'),
       }
       for _, p in ipairs(projects[vim.g.profile] or {}) do
-        table.insert(buttons, button(p.key, '  ' .. p.name, '<cmd>Neotree dir=' .. p.path .. ' position=current<CR>'))
+        table.insert(buttons, button(p.key, '  ' .. p.name, '<cmd>Neotree dir=' .. p.path .. ' position=current<CR>'))
       end
       table.insert(buttons, button('q', '  Quit', ':qa<CR>'))
       dashboard.section.buttons.val = buttons

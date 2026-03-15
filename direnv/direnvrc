@@ -1,0 +1,39 @@
+# ~/.config/direnv/direnvrc
+# Global direnv configuration with reusable functions
+
+# Smart venv activation - checks .venv/ and app/.venv/
+use_venv() {
+  local venv_path=""
+
+  if [[ -d ".venv" ]]; then
+    venv_path=".venv"
+  elif [[ -d "app/.venv" ]]; then
+    venv_path="app/.venv"
+  fi
+
+  if [[ -n "$venv_path" && -f "$venv_path/bin/activate" ]]; then
+    source "$venv_path/bin/activate"
+  else
+    return 1
+  fi
+}
+
+# Silent version - activates if found, no error if not
+use_venv_if_exists() {
+  local venv_path=""
+
+  if [[ -d ".venv" ]]; then
+    venv_path=".venv"
+  elif [[ -d "app/.venv" ]]; then
+    venv_path="app/.venv"
+  fi
+
+  if [[ -n "$venv_path" && -f "$venv_path/bin/activate" ]]; then
+    source "$venv_path/bin/activate"
+  fi
+}
+
+# Source .envrc.local if it exists (for shared repos)
+source_local() {
+  source_env_if_exists .envrc.local
+}

@@ -1,5 +1,7 @@
 /*
 !nvim/
 !ghostty/
+!direnv/
+!starship.toml
 !.gitignore
 !README.md
