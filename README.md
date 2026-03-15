@@ -2,7 +2,7 @@
 
 My configuration files.
 
-- `nvim/` - Neovim config, forked from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
+- `nvim/` - Neovim config
 - `ghostty/` - Ghostty terminal config
 - `starship.toml` - Starship prompt config
 - `direnv/` - direnv config with helper functions for venv activation
