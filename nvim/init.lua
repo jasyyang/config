@@ -105,6 +105,13 @@ require('lazy').setup({
   },
 
   {
+    'NeogitOrg/neogit',
+    config = function()
+      vim.keymap.set('n', '<leader>tg', function() vim.cmd 'Neogit' end, { desc = '[T]oggle Neo[g]it ' })
+    end,
+  },
+
+  {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = function()
