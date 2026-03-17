@@ -33,8 +33,8 @@ Profile is auto-detected by hostname (`kensho` or `personal`).
 Some files are kept local and not tracked:
 
 - `~/.zprofile.secrets`
-- `~/.config/shell/`
-- `~/.local/bin/`
+- `~/.local/bin/` # some scripts that must be stored locally
+- `~/.config/shell/aliases.local.zsh` # aliases that must be stored locally
 
 ## Usage
 
