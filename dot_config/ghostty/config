@@ -15,7 +15,7 @@ background-blur=8
 background=#000000
 macos-titlebar-style = hidden
 cursor-style = block
-theme = TokyoNight Night
+theme = TokyoNight Night 
 
 font-family = Hack Nerd Font Mono
 font-size=13

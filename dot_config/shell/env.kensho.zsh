@@ -16,3 +16,4 @@ export UV_NATIVE_TLS=true
 # Kensho
 export KENSHO_USE_PG=1
 export AWS_PROFILE=kensho
+export NODE_OPTIONS="--use-system-ca"

@@ -31,7 +31,8 @@ vim.diagnostic.config {
   virtual_lines = false,
   jump = { float = true },
 }
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.cmd.q, { desc = '[q]uit current window' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -83,9 +84,9 @@ require('lazy').setup({
       icons = { mappings = vim.g.have_nerd_font },
 
       spec = {
-        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>s', group = '[s]earch', mode = { 'n', 'v' } },
+        { '<leader>t', group = '[t]oggle' },
+        { '<leader>h', group = 'Git [h]unk', mode = { 'n', 'v' } },
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
@@ -94,7 +95,7 @@ require('lazy').setup({
   {
     'hat0uma/csvview.nvim',
     config = function()
-      vim.keymap.set('n', '<leader>tc', function() vim.cmd 'CsvViewToggle' end, { desc = '[T]oggle [C]svview' })
+      vim.keymap.set('n', '<leader>tc', function() vim.cmd 'CsvViewToggle' end, { desc = '[t]oggle [c]svview' })
     end,
   },
 
@@ -107,14 +108,14 @@ require('lazy').setup({
         else
           vim.cmd 'DiffviewClose'
         end
-      end, { desc = '[T]oggle Dif[f]view' })
+      end, { desc = '[t]oggle Dif[f]view' })
     end,
   },
 
   {
     'NeogitOrg/neogit',
     config = function()
-      vim.keymap.set('n', '<leader>tg', function() vim.cmd 'Neogit' end, { desc = '[T]oggle Neo[g]it ' })
+      vim.keymap.set('n', '<leader>tg', function() vim.cmd 'Neogit' end, { desc = '[t]oggle Neo[g]it ' })
     end,
   },
 
@@ -203,16 +204,16 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'ui-select')
 
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[s]earch [f]iles' })
+      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch by [g]rep' })
+      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [s]iagnostics' })
+      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
+      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[s]earch Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[s]earch [c]ommands' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -220,17 +221,17 @@ require('lazy').setup({
         callback = function(event)
           local buf = event.buf
 
-          vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
+          vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[g]oto [r]eferences' })
 
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
+          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[g]oto [i]mplementation' })
 
-          vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+          vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[g]oto [d]efinition' })
 
           vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
 
           vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Open Workspace Symbols' })
 
-          vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+          vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[g]oto [t]ype Definition' })
         end,
       })
 
@@ -255,10 +256,10 @@ require('lazy').setup({
             prompt_title = 'Live Grep in Open Files',
           }
         end,
-        { desc = '[S]earch [/] in Open Files' }
+        { desc = '[s]earch [/] in Open Files' }
       )
 
-      vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[s]earch [n]eovim files' })
     end,
   },
 
@@ -289,11 +290,11 @@ require('lazy').setup({
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('grn', vim.lsp.buf.rename, '[r]e[n]ame')
 
-          map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('gra', vim.lsp.buf.code_action, '[g]oto code [a]ction', { 'n', 'x' })
 
-          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('grD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method('textDocument/documentHighlight', event.buf) then
@@ -320,7 +321,7 @@ require('lazy').setup({
           end
 
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
-            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[t]oggle Inlay [h]ints')
           end
         end,
       })
@@ -368,6 +369,7 @@ require('lazy').setup({
             },
           },
         },
+        ts_ls = {},
         stylua = {},
         lua_ls = {
           on_init = function(client)
@@ -416,7 +418,7 @@ require('lazy').setup({
         '<leader>f',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[f]ormat buffer',
       },
     },
     ---@module 'conform'
@@ -439,6 +441,10 @@ require('lazy').setup({
         markdown = { 'prettier' },
         python = { 'ruff_organize_imports', 'ruff_format' },
         rust = { 'rustfmt' },
+        typescript = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
+        javascript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
       },
     },
   },
@@ -505,19 +511,20 @@ require('lazy').setup({
         if not handle then return '' end
         local branch = handle:read('*a'):gsub('%s+', '')
         handle:close()
-        if branch == '' then return ' not in a git repository' end
-        return ' ' .. branch
+        if branch == '' then return '  not in a git repository' end
+        return '  ' .. branch
       end
 
       dashboard.section.header.opts = {
         position = 'center',
-        h1 = 'AlphaHeader',
+        hl = 'AlphaHeader',
       }
       local projects = {
         kensho = {
           { key = 'p1', name = 'text2sql', path = '/Users/jasonyang/code/zentreefish/projects/text2sql' },
           { key = 'p2', name = 'kce', path = '/Users/jasonyang/code/zentreefish/klib/pkgs/kensho_code_eval' },
-          { key = 'p3', name = 'aquila', path = '/Users/jasonyang/code/aquila' },
+          { key = 'p3', name = 'kensho-text2sql', path = '/Users/jasonyang/code/zentreefish/klib/pkgs/kensho_text2sql' },
+          { key = 'p4', name = 'aquila', path = '/Users/jasonyang/code/aquila' },
         },
         personal = {
           { key = 'p1', name = 'code', path = '/home/jason/code' },
@@ -528,7 +535,7 @@ require('lazy').setup({
         button('d', '󰱼  Current directory', '<cmd>Neotree dir=. position=current<CR>'),
         button('r', '  Recent files', ':Telescope oldfiles<CR>'),
         button('g', '󰈬  Live grep', ':Telescope live_grep<CR>'),
-        button('c', '  Config', '<cmd>Neotree dir=~/.config position=current<CR>'),
+        button('c', '  Chezmoi', '<cmd>Neotree dir=~/.local/share/chezmoi position=current<CR>'),
       }
       for _, p in ipairs(projects[vim.g.profile] or {}) do
         table.insert(buttons, button(p.key, '  ' .. p.name, '<cmd>Neotree dir=' .. p.path .. ' position=current<CR>'))
@@ -538,47 +545,13 @@ require('lazy').setup({
       dashboard.section.buttons.opts = {
         position = 'center',
       }
-      local recent_files = {
-        type = 'group',
-        val = {
-          {
-            type = 'text',
-            val = 'Recent files',
-            opts = {
-              hl = 'AlphaHeader',
-              position = 'center',
-            },
-          },
-          { type = 'padding', val = 1 },
-          {
-            type = 'group',
-            val = function()
-              local oldfiles = {}
-              for _, f in ipairs(vim.v.oldfiles) do
-                if vim.fn.filereadable(f) == 1 then
-                  table.insert(oldfiles, {
-                    type = 'text',
-                    val = '  ' .. vim.fn.fnamemodify(f, ':~'),
-                    opts = {
-                      position = 'center',
-                      hl = 'AlphaButtons',
-                    },
-                  })
-                end
-                if #oldfiles >= 8 then break end
-              end
-              return oldfiles
-            end,
-          },
-        },
-      }
-
       dashboard.section.footer.val = function()
         local stats = require('lazy').stats()
         return {
           '',
+          '󰉋  ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':~'),
           get_git_branch(),
-          '⚡ Neovim loaded ' .. stats.count .. ' plugins in ' .. math.floor(stats.startuptime) .. 'ms',
+          '⚡  Neovim loaded ' .. stats.count .. ' plugins in ' .. math.floor(stats.startuptime) .. 'ms',
         }
       end
       dashboard.section.footer.opts = {
@@ -592,8 +565,6 @@ require('lazy').setup({
         { type = 'padding', val = 2 },
         dashboard.section.buttons,
         { type = 'padding', val = 2 },
-        recent_files,
-        { type = 'padding', val = 2 },
         dashboard.section.footer,
       }
 
@@ -601,9 +572,6 @@ require('lazy').setup({
       vim.api.nvim_set_hl(0, 'AlphaButtons', { link = 'Keyword' })
       vim.api.nvim_set_hl(0, 'AlphaShortcut', { link = 'Number' })
       vim.api.nvim_set_hl(0, 'AlphaFooter', { link = 'Comment' })
-      dashboard.section.footer.opts = {
-        position = 'center',
-      }
       require('alpha').setup(dashboard.config)
     end,
   },
@@ -650,15 +618,20 @@ require('lazy').setup({
   },
 
   {
-    'folke/tokyonight.nvim',
+    'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false },
-        },
-      }
+      vim.opt.background = 'dark'
+      -- vim.cmd.colorscheme 'oxocarbon'
+    end,
+  },
+
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.opt.background = 'dark'
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
